@@ -26,7 +26,7 @@ const TodoDetail = React.createClass({
           <textarea ref="todoContent" cols="30" rows="5" defaultValue={currentTodo.text}></textarea>
         </div>
       );
-      buttonClass.push('glyphicon-ok');
+      buttonClass.push('glyphicon-floppy-disk');
     } else {
       content = (
         <div className="todo-text">
