@@ -1,0 +1,1 @@
+This App uses React & Redux for handling the data and displaying it. It also uses webpack for compiling and building project resources. For CSS I have used SCSS and defined loaders for compiling the files into 1 css file.
