@@ -11,3 +11,12 @@ export function removeTodo(index){
     index
   };
 }
+
+export function editTodo(index, text) {
+  let i = parseInt(index);
+  return {
+    type: 'EDIT_TODO',
+    index: i,
+    text
+  };
+}
