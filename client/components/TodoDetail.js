@@ -1,11 +1,11 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const TodoDetail = React.createClass({
   getInitialState () {
-    console.log('Init');
     return {
       editable: false
-    }
+    };
   },
   handleEdit (e) {
     let currentState = this.state;
@@ -22,9 +22,16 @@ const TodoDetail = React.createClass({
     let buttonClass = ['ctrl-btn'];
     if (this.state.editable) {
       content = (
-        <div className="todo-editable">
-          <textarea ref="todoContent" cols="30" rows="5" defaultValue={currentTodo.text}></textarea>
-        </div>
+        <ReactCSSTransitionGroup
+          transitionName="textarea-transition"
+          transitionEnter={false}
+          transitionLeave={false}
+          transitionAppear={true}
+          transitionAppearTimeout={500}>
+          <div className="todo-editable" key="btn-1">
+            <textarea ref="todoContent" cols="30" rows="5" defaultValue={currentTodo.text}></textarea>
+          </div>
+        </ReactCSSTransitionGroup>
       );
       buttonClass.push('glyphicon-floppy-disk');
     } else {
