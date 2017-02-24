@@ -7,17 +7,27 @@ const TodoDetail = React.createClass({
       editable: false
     };
   },
+  getCurrentTodo () {
+    let id = this.props.params.todoId;
+    let currentTodo = this.props.todos.find((todo) => todo.id === id);
+    return currentTodo;
+  },
+  getCurrentTodoIndex () {
+    let id = this.props.params.todoId;
+    let index = this.props.todos.findIndex((todo) => todo.id === id);
+    return index;
+  },
   handleEdit (e) {
     let currentState = this.state;
     currentState.editable = !currentState.editable;
     if (!currentState.editable) {
-      this.props.editTodo(this.props.params.todoId, this.refs.todoContent.value);
+      let index = this.getCurrentTodoIndex();
+      this.props.editTodo(index, this.props.params.todoId, this.refs.todoContent.value);
     }
     this.setState(currentState);
   },
   render () {
-    let index = this.props.params.todoId;
-    let currentTodo = this.props.todos[index];
+    let currentTodo = this.getCurrentTodo();
     let content = null;
     let buttonClass = ['ctrl-btn'];
     if (this.state.editable) {

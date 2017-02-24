@@ -12,11 +12,19 @@ export function removeTodo(index){
   };
 }
 
-export function editTodo(index, text) {
+export function editTodo(index, id, text) {
   let i = parseInt(index);
   return {
     type: 'EDIT_TODO',
     index: i,
+    id,
     text
+  };
+}
+
+export function setVisibilityFilter(filter) {
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    filter
   };
 }

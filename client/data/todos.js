@@ -1,51 +1,63 @@
 const todos = [
   {
-    id: 0,
-    text: 'Do 1'
+    id: "a",
+    text: 'Do 1',
+    completed: false
   },
   {
-    id: 1,
-    text: 'Do 2'
+    id: "b",
+    text: 'Do 2',
+    completed: false
   },
   {
-    id: 2,
-    text: 'Do 3'
+    id: "c",
+    text: 'Do 3',
+    completed: false
   },
   {
-    id: 3,
-    text: 'Do 4'
+    id: "d",
+    text: 'Do 4',
+    completed: false
   },
   {
-    id: 4,
-    text: 'Do 5'
+    id: "e",
+    text: 'Do 5',
+    completed: false
   },
   {
-    id: 5,
-    text: 'Do 6'
+    id: "f",
+    text: 'Do 6',
+    completed: true
   },
   {
-    id: 6,
-    text: 'Do 7'
+    id: "g",
+    text: 'Do 7',
+    completed: false
   },
   {
-    id: 7,
-    text: 'Do 8'
+    id: "h",
+    text: 'Do 8',
+    completed: true
   },
   {
-    id: 8,
-    text: 'Do 9'
+    id: "i",
+    text: 'Do 9',
+    completed: true
   },
   {
-    id: 9,
-    text: 'Do 10'
+    id: "j",
+    text: 'Do 10',
+    completed: false
   },
   {
-    id: 10,
-    text: 'Do 11'
+    id: "k",
+    text: 'Do 11',
+    completed: false
   },
   {
-    id: 11,
-    text: 'Do 12'
+    id: "l",
+    text: 'Do 12',
+    completed: false
   }
 ];
 

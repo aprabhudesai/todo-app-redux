@@ -3,12 +3,18 @@ import { Link } from 'react-router';
 
 const Todo = React.createClass({
   getCurrentTodo () {
-    let index = this.props.i;
-    let currentTodo = this.props.todos[index];
+    let id = this.props.id;
+    let currentTodo = this.props.todos.find((todo) => todo.id === id);
     return currentTodo;
   },
+  getCurrentTodoIndex () {
+    let id = this.props.id;
+    let index = this.props.todos.findIndex((todo) => todo.id === id);
+    return index;
+  },
   handleRemove(e) {
-    this.props.removeTodo(this.props.i)
+    let index = this.getCurrentTodoIndex();
+    this.props.removeTodo(index);
   },
   render () {
     let currentTodo = this.getCurrentTodo();

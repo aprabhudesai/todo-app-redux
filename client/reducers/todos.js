@@ -6,7 +6,7 @@ function todos (state = [], action) {
       return [
         ...state,
         {
-          id: lastTodoId + 1,
+          id: String.fromCharCode(lastTodoId.charCodeAt(0) + 1),
           text: action.text
         }
       ];
@@ -21,7 +21,7 @@ function todos (state = [], action) {
       return [
         ...state.slice(0, index),
         {
-          id: action.index,
+          id: action.id,
           text: action.text
         },
         ...state.slice(index + 1)
