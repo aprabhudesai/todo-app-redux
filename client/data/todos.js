@@ -1,61 +1,63 @@
+let uuid = require('node-uuid');
+
 const todos = [
   {
-    id: "a",
+    id: uuid.v4(),
     text: 'Do 1',
     completed: false
   },
   {
-    id: "b",
+    id: uuid.v4(),
     text: 'Do 2',
     completed: false
   },
   {
-    id: "c",
+    id: uuid.v4(),
     text: 'Do 3',
     completed: false
   },
   {
-    id: "d",
+    id: uuid.v4(),
     text: 'Do 4',
     completed: false
   },
   {
-    id: "e",
+    id: uuid.v4(),
     text: 'Do 5',
     completed: false
   },
   {
-    id: "f",
+    id: uuid.v4(),
     text: 'Do 6',
     completed: true
   },
   {
-    id: "g",
+    id: uuid.v4(),
     text: 'Do 7',
     completed: false
   },
   {
-    id: "h",
+    id: uuid.v4(),
     text: 'Do 8',
     completed: true
   },
   {
-    id: "i",
+    id: uuid.v4(),
     text: 'Do 9',
     completed: true
   },
   {
-    id: "j",
+    id: uuid.v4(),
     text: 'Do 10',
     completed: false
   },
   {
-    id: "k",
+    id: uuid.v4(),
     text: 'Do 11',
     completed: false
   },
   {
-    id: "l",
+    id: uuid.v4(),
     text: 'Do 12',
     completed: false
   }
