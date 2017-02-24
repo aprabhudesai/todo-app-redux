@@ -1,12 +1,13 @@
+let uuid = require('node-uuid');
+
 function todos (state = [], action) {
   let index;
   switch (action.type) {
     case 'ADD_TODO':
-      let lastTodoId = state[state.length - 1].id;
       return [
         ...state,
         {
-          id: String.fromCharCode(lastTodoId.charCodeAt(0) + 1),
+          id: uuid.v4(),
           text: action.text
         }
       ];
