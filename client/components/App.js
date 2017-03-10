@@ -6,8 +6,7 @@ import Main from './Main';
 
 function mapStateToProps(state) {
   return {
-    todos: state.todos,
-    visibilityFilter: state.visibilityFilter
+    todos: state.todos
   };
 }
 

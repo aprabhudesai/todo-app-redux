@@ -22,9 +22,9 @@ export function editTodo(index, id, text) {
   };
 }
 
-export function setVisibilityFilter(filter) {
-  return {
-    type: 'SET_VISIBILITY_FILTER',
-    filter
-  };
-}
+// export function setVisibilityFilter(filter) {
+//   return {
+//     type: 'SET_VISIBILITY_FILTER',
+//     filter
+//   };
+// }

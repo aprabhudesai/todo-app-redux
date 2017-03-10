@@ -6,8 +6,7 @@ import rootReducer from './reducers/index';
 import todos from './data/todos';
 
 const defaultState = {
-  todos,
-  visibilityFilter: 'SHOW_ALL'
+  todos
 };
 
 const enhancers = compose(

@@ -16,7 +16,7 @@ require('./styles/main.scss');
 const router = (
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App}>
+      <Route path="/(:filter)" component={App}>
         <IndexRoute component={TodoList}></IndexRoute>
         <Route path="/todo/:todoId" component={TodoDetail}></Route>
       </Route>

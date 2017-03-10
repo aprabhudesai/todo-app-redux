@@ -1,5 +1,6 @@
 import React from 'react';
 import Todo from './Todo';
+import FiltersTab from './FiltersTab';
 
 const TodoList = React.createClass({
   handleAddTodo (e) {
@@ -9,49 +10,24 @@ const TodoList = React.createClass({
     this.refs.todoForm.reset();
   },
   getVisibleTodos () {
-    switch (this.props.visibilityFilter) {
-      case 'SHOW_ALL':
+    var visibilityFilter = this.props.params.filter || 'all';
+    switch (visibilityFilter) {
+      case 'all':
         return this.props.todos;
-      case 'SHOW_COMPLETED':
+      case 'completed':
         return this.props.todos.filter((todo) => todo.completed);
-      case 'SHOW_ACTIVE':
+      case 'active':
         return this.props.todos.filter((todo) => !todo.completed);
       default:
         return this.props.todos;
     }
   },
-  handleFilterClick(type) {
-    this.props.setVisibilityFilter(type);
-  },
-  getFilter (type, text) {
-    if (this.props.visibilityFilter === type) {
-      return (
-        <span className="filter active">{text}</span>
-      );
-    }
-    else {
-      return (
-        <a href="#" className="filter" onClick={this.handleFilterClick.bind(this, type)}>{text}</a>
-      );
-    }
-  },
-  getVisibilityFilters () {
-    return (
-      <div className="todo-filters">
-        {this.getFilter('SHOW_ALL', 'All')}
-        { ' | ' }
-        {this.getFilter('SHOW_COMPLETED', 'Completed')}
-        { ' | ' }
-        {this.getFilter('SHOW_ACTIVE', 'Active')}
-      </div>
-    );
-  },
   render () {
     let todos = this.getVisibleTodos();
-    let visibilityFilters = this.getVisibilityFilters();
+    var visibilityFilter = this.props.params.filter || 'all';
     return (
       <div className="todo-panel">
-        {visibilityFilters}
+        <FiltersTab filter={visibilityFilter} />
         <div className="todo-list">
           {todos.map((todo, index) => {
             return (

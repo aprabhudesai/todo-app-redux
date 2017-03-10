@@ -12,7 +12,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('*', function(req, resp) {
+app.get('/*', function(req, resp) {
   resp.sendFile(path.join(__dirname, 'index.html'));
 });
 
