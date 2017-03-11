@@ -13,7 +13,19 @@ const enhancers = compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
+function addPromiseSupportToDispatch (store) {
+  const rawDispatch = store.dispatch;
+  return (action) => {
+    if (typeof action.then === 'function') {
+      return action.then(rawDispatch);
+    }
+    return rawDispatch(action);
+  }
+}
+
 const store = createStore(rootReducer, defaultState, enhancers);
+
+store.dispatch = addPromiseSupportToDispatch(store);
 
 export const history = syncHistoryWithStore(browserHistory, store);
 

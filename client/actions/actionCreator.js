@@ -1,3 +1,5 @@
+import * as api from '../api/todos';
+
 export function addTodo(text) {
   return {
     type: 'ADD_TODO',
@@ -22,6 +24,19 @@ export function editTodo(index, id, text) {
   };
 }
 
+function receiveTodos(filter, response) {
+  return {
+    type: 'RECEIVE_TODOS',
+    filter,
+    response
+  };
+}
+
+export const fetchTodos = (filter) => {
+  return api.fetchTodos(filter).then((response) => {
+    return receiveTodos(filter, response);
+  });
+}
 // export function setVisibilityFilter(filter) {
 //   return {
 //     type: 'SET_VISIBILITY_FILTER',
