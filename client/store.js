@@ -13,19 +13,27 @@ const enhancers = compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
-function addPromiseSupportToDispatch (store) {
-  const rawDispatch = store.dispatch;
-  return (action) => {
-    if (typeof action.then === 'function') {
-      return action.then(rawDispatch);
+function promise (store) {
+  return (next) => {
+    return (action) => {
+      if (typeof action.then === 'function') {
+        return action.then(next);
+      }
+      return next(action);
     }
-    return rawDispatch(action);
-  }
+  };
 }
 
-const store = createStore(rootReducer, defaultState, enhancers);
+const wrapDispatchWithMiddlewares = (store, middlewares) => {
+  middlewares.slice().reverse().forEach((middleware) => {
+    store.dispatch = middleware(store)(store.dispatch);
+  });
+};
 
-store.dispatch = addPromiseSupportToDispatch(store);
+const store = createStore(rootReducer, defaultState, enhancers);
+const middlewares = [];
+middlewares.push(promise);
+wrapDispatchWithMiddlewares(store, middlewares);
 
 export const history = syncHistoryWithStore(browserHistory, store);
 
