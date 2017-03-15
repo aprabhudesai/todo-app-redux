@@ -1,35 +1,61 @@
-let uuid = require('node-uuid');
+import { combineReducers } from 'redux';
 
-function todos (state = [], action) {
-  let index;
+const byIds = (state = {}, action) => {
   switch (action.type) {
-    case 'ADD_TODO':
-      return [
-        ...state,
-        {
-          id: uuid.v4(),
-          text: action.text
-        }
-      ];
-    case 'REMOVE_TODO':
-      index = action.index;
-      return [
-        ...state.slice(0, index),
-        ...state.slice(index + 1)
-      ];
-    case 'EDIT_TODO':
-      index = action.index;
-      return [
-        ...state.slice(0, index),
-        {
-          id: action.id,
-          text: action.text
-        },
-        ...state.slice(index + 1)
-      ];
+    case 'RECEIVE_TODOS':
+      const nextState = { ...state };
+      action.response.forEach((todo) => {
+        nextState[todo.id] = todo;
+      });
+      return nextState;
     default:
       return state;
   }
-}
+};
 
-export default todos;
+const allIds = (state = [], action) => {
+  if (action.filter !== 'all') {
+    return state;
+  }
+  switch (action.type) {
+    case 'RECEIVE_TODOS':
+      return action.response.map( (todo) => todo.id);
+    default:
+      return state;
+  }
+};
+
+const activeIds = (state = [], action) => {
+  if (action.filter !== 'active') {
+    return state;
+  }
+  switch (action.type) {
+    case 'RECEIVE_TODOS':
+      return action.response.map( (todo) => todo.id);
+    default:
+      return state;
+  }
+};
+
+const completedIds = (state = [], action) => {
+  if (action.filter !== 'completed') {
+    return state;
+  }
+  switch (action.type) {
+    case 'RECEIVE_TODOS':
+      return action.response.map( (todo) => todo.id);
+    default:
+      return state;
+  }
+};
+
+const idsByFilter = combineReducers({
+  all: allIds,
+  active: activeIds,
+  completed: completedIds
+});
+
+export const todos = combineReducers({
+  byIds,
+  idsByFilter
+});

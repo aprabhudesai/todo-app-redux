@@ -9,7 +9,7 @@ const TodoDetail = React.createClass({
   },
   getCurrentTodo () {
     let id = this.props.params.todoId;
-    let currentTodo = this.props.todos.find((todo) => todo.id === id);
+    let currentTodo = this.props.todos.byIds[id];
     return currentTodo;
   },
   getCurrentTodoIndex () {

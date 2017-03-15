@@ -11,19 +11,12 @@ const TodoList = React.createClass({
   },
   getVisibleTodos () {
     var visibilityFilter = this.props.params.filter || 'all';
-    switch (visibilityFilter) {
-      case 'all':
-        return this.props.todos;
-      case 'completed':
-        return this.props.todos.filter((todo) => todo.completed);
-      case 'active':
-        return this.props.todos.filter((todo) => !todo.completed);
-      default:
-        return this.props.todos;
-    }
+    const allIds = this.props.todos.idsByFilter[visibilityFilter];
+    return allIds.map((id) => this.props.todos.byIds[id]);
   },
   render () {
     let todos = this.getVisibleTodos();
+    console.log('TODOS:', todos );
     var visibilityFilter = this.props.params.filter || 'all';
     return (
       <div className="todo-panel">

@@ -1,39 +1,23 @@
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-
+import promise from 'redux-promise';
+import createLogger from 'redux-logger';
 import rootReducer from './reducers/index';
-import todos from './data/todos';
 
 const defaultState = {
-  todos
+  todos: {}
 };
 
+const middlewares = [promise];
+middlewares.push(createLogger());
+
 const enhancers = compose(
+  applyMiddleware(...middlewares),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
-function promise (store) {
-  return (next) => {
-    return (action) => {
-      if (typeof action.then === 'function') {
-        return action.then(next);
-      }
-      return next(action);
-    }
-  };
-}
-
-const wrapDispatchWithMiddlewares = (store, middlewares) => {
-  middlewares.slice().reverse().forEach((middleware) => {
-    store.dispatch = middleware(store)(store.dispatch);
-  });
-};
-
 const store = createStore(rootReducer, defaultState, enhancers);
-const middlewares = [];
-middlewares.push(promise);
-wrapDispatchWithMiddlewares(store, middlewares);
 
 export const history = syncHistoryWithStore(browserHistory, store);
 

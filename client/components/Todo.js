@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const Todo = React.createClass({
   getCurrentTodo () {
     let id = this.props.id;
-    let currentTodo = this.props.todos.find((todo) => todo.id === id);
+    let currentTodo = this.props.todos.byIds[id];
     return currentTodo;
   },
   getCurrentTodoIndex () {
