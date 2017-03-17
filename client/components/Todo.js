@@ -2,11 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const Todo = React.createClass({
-  getCurrentTodo () {
-    let id = this.props.id;
-    let currentTodo = this.props.todos.byIds[id];
-    return currentTodo;
-  },
   getCurrentTodoIndex () {
     let id = this.props.id;
     let index = this.props.todos.findIndex((todo) => todo.id === id);
@@ -17,7 +12,7 @@ const Todo = React.createClass({
     this.props.removeTodo(index);
   },
   render () {
-    let currentTodo = this.getCurrentTodo();
+    let currentTodo = this.props.todo;
     return (
       <div className="todo">
         <div className="todo-text">

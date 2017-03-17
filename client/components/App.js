@@ -4,6 +4,7 @@ import React from 'react';
 
 import * as actionCreators from '../actions/actionCreator';
 import Main from './Main';
+import { getVisibleTodos, getIsFetching } from '../reducers/index';
 
 class App extends React.Component {
   componentDidMount () {
@@ -17,7 +18,8 @@ class App extends React.Component {
   }
 
   fetchData () {
-    const { filter, fetchTodos } = this.props;
+    const { filter, requestTodos, fetchTodos } = this.props;
+    requestTodos(filter);
     fetchTodos(filter);
   }
 
@@ -31,7 +33,8 @@ class App extends React.Component {
 function mapStateToProps(state, { params }) {
   var filter = params.filter || 'all';
   return {
-    todos: state.todos,
+    todos: getVisibleTodos(state, filter),
+    isFetching: getIsFetching(state, filter),
     filter
   };
 }

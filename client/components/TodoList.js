@@ -9,22 +9,26 @@ const TodoList = React.createClass({
     this.props.addTodo(todoText);
     this.refs.todoForm.reset();
   },
-  getVisibleTodos () {
-    var visibilityFilter = this.props.params.filter || 'all';
-    const allIds = this.props.todos.idsByFilter[visibilityFilter];
-    return allIds.map((id) => this.props.todos.byIds[id]);
-  },
   render () {
-    let todos = this.getVisibleTodos();
-    console.log('TODOS:', todos );
-    var visibilityFilter = this.props.params.filter || 'all';
+    let { todos, isFetching, params} = this.props;
+    if (isFetching && !todos.length) {
+      return (
+        <div className="placeholder-panel">
+          <div className="placeholder-text">
+            Loading
+            <span className="animated">&nbsp;. . . </span>
+          </div>
+        </div>
+      );
+    }
+    const visibilityFilter = params.filter || 'all';
     return (
       <div className="todo-panel">
         <FiltersTab filter={visibilityFilter} />
         <div className="todo-list">
           {todos.map((todo, index) => {
             return (
-              <Todo key={index} i={index} id={todo.id} {...this.props} />
+              <Todo key={index} i={index} todo={todo} {...this.props} />
             );
           })}
         </div>

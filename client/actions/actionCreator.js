@@ -24,7 +24,14 @@ export function editTodo(index, id, text) {
   };
 }
 
-function receiveTodos(filter, response) {
+export const requestTodos = (filter) => {
+  return {
+    type: 'REQUEST_TODOS',
+    filter
+  };
+};
+
+const receiveTodos = (filter, response) => {
   return {
     type: 'RECEIVE_TODOS',
     filter,

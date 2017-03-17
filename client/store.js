@@ -10,7 +10,11 @@ const defaultState = {
 };
 
 const middlewares = [promise];
-middlewares.push(createLogger());
+
+// Do this only if in dev environment
+if (process.env.NODE_ENV !== 'production') {
+  middlewares.push(createLogger());
+}
 
 const enhancers = compose(
   applyMiddleware(...middlewares),

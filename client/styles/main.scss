@@ -23,6 +23,33 @@ body {
     text-shadow: 0 4px 0 #DFDFDF;
   }
 
+  .placeholder-panel {
+    display: flex;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+
+    @keyframes eastOut {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .placeholder-text {
+      font-size: 20px;
+
+      .animated {
+        animation-name: eastOut;
+        animation-duration: 0.5s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+      }
+    }
+  }
+
   .todo-panel {
     display: flex;
     flex-direction: column;
