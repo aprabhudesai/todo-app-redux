@@ -4,7 +4,7 @@ import React from 'react';
 
 import * as actionCreators from '../actions/actionCreator';
 import Main from './Main';
-import { getVisibleTodos, getIsFetching } from '../reducers/index';
+import { getVisibleTodos, getIsFetching, getErrorMessage } from '../reducers/index';
 
 class App extends React.Component {
   componentDidMount () {
@@ -18,9 +18,10 @@ class App extends React.Component {
   }
 
   fetchData () {
-    const { filter, requestTodos, fetchTodos } = this.props;
-    requestTodos(filter);
-    fetchTodos(filter);
+    const { filter, fetchTodos } = this.props;
+    fetchTodos(filter).then(() => {
+      console.log('Done fetching !!');
+    });
   }
 
   render () {
@@ -35,6 +36,7 @@ function mapStateToProps(state, { params }) {
   return {
     todos: getVisibleTodos(state, filter),
     isFetching: getIsFetching(state, filter),
+    errorMessage: getErrorMessage(state, filter),
     filter
   };
 }

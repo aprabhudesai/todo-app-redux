@@ -20,3 +20,7 @@ export const getVisibleTodos = (state, filter) => {
 export const getIsFetching = (state, filter) => {
   return fromList.getIsFetching(state.todos.listByFilter[filter]);
 }
+
+export const getErrorMessage = (state, filter) => {
+  return fromList.getErrorMessage(state.todos.listByFilter[filter]);
+}

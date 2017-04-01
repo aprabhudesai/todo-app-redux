@@ -6,6 +6,9 @@ const delay = (ms) =>
 
 export const fetchTodos = (filter) => {
   return delay(2000).then(() => {
+      if (Math.random() > 0.5) {
+        throw new Error('Error getting TODOS!!');
+      }
       switch (filter) {
         case 'all':
           return todos;

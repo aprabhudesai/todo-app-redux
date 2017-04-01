@@ -1,6 +1,7 @@
 import React from 'react';
 import Todo from './Todo';
 import FiltersTab from './FiltersTab';
+import FetchError from './FetchError';
 
 const TodoList = React.createClass({
   handleAddTodo (e) {
@@ -10,7 +11,7 @@ const TodoList = React.createClass({
     this.refs.todoForm.reset();
   },
   render () {
-    let { todos, isFetching, params} = this.props;
+    let { todos, isFetching, params, errorMessage, fetchTodos, filter } = this.props;
     if (isFetching && !todos.length) {
       return (
         <div className="placeholder-panel">
@@ -19,6 +20,14 @@ const TodoList = React.createClass({
             <span className="animated">&nbsp;. . . </span>
           </div>
         </div>
+      );
+    }
+    if (errorMessage && !todos.length) {
+      return (
+        <FetchError
+          message={errorMessage}
+          onRetry={ () => { fetchTodos(filter)}}
+        />
       );
     }
     const visibilityFilter = params.filter || 'all';
